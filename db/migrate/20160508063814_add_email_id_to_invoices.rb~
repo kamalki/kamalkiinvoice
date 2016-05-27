@@ -1,0 +1,4 @@
+class AddEmailIdToInvoices < ActiveRecord::Migration
+  def change
+  end
+end

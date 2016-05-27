@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <%= stylesheet_link_tag    'application' %>
+      <style>
+              .navbar
+              {
+                  max-width:180px;
+                  margin-top: 0;
+                  margin-left: 0px;
+                  min-height: 397px;
+              }
+              .col-md-offset-2{margin-left:0px!important;}
+              .no-padding{padding:0px;}
+              .col-md-10{width: 60%}
+              .container-space{margin-top: 100px;}
+              .panel{min-height: 397px !important; width: 900px !important;}
+              .nav li.active a, nav li:hover a {
+                  background-color: #FFFF33;
+                  color:#000;
+              }
+              .nav li a {
+                  color: #ffffff;
+                  padding: 0px 24px;
+                  text-decoration: none;
+              }
+
+      </style>
+      <%= javascript_include_tag 'application' %>
+      <%= csrf_meta_tags %>
+    </head>
+    <body onload="myFunction()">
+        <div class="container container-space">
+            <nav class="navbar navbar-inverse col-md-4">
+              <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                  <div id="menu">
+                      <ul class="nav navbar-nav">
+                         <li class="active"><h3><%= link_to((content_tag(:span, "Products")), "/products")%></h3></li>
+                         <li><h3><%= link_to((content_tag(:span, "Invoices")), "/invoices")%></h3></li>
+                      </ul>
+                  </div>
+                </div>
+              </div>
+            </nav>
+            <div class="container-fluid">
+            <%= yield %>
+            </div>
+        </div><!--container-->
+    </body>
+</html>

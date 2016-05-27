@@ -1,0 +1,4 @@
+class AddDPhoneNumberToInvoices < ActiveRecord::Migration
+  def change
+  end
+end
