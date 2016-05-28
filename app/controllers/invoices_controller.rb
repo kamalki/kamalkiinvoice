@@ -30,6 +30,7 @@ class InvoicesController < ApplicationController
 
   # GET /invoices/new
   def new
+  
     @invoice = Invoice.new
   end
 
@@ -77,7 +78,8 @@ class InvoicesController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  def populate_price
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_invoice

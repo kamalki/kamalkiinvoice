@@ -1,12 +1,17 @@
 class ProductsController < ApplicationController
 
   def render_read
-    @product = Product.where(:id => params[:id]).first
-    #render :text => @product.
-    render :partial =>  "render_read"
+    @product_id = params[:id]
+    if @product_id.present?
+    @product = Product.where(:id => @product_id).first
+     if @product.present?
+     @product_rate = @product.rate
+      end
+    end
   end
 
   def new
+    byebug
   	@product = Product.new
   end
 
@@ -15,6 +20,7 @@ class ProductsController < ApplicationController
   end
 
   def create
+    byebug
     @product=Product.new(product_params)
     respond_to do |format|
       if @product.save

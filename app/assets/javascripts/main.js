@@ -1,21 +1,31 @@
+
+function validate_add_products(){
+ if ($("#invoice_product_ids").val() == ''){
+  alert ('Please select atleast 1 product ');
+  return false;
+ }
+ return true;
+}
+
 $(document).ready(function (){
 	var f =1;
 
-	$("#invoice_product_ids").on('change',function(){
-        var id=$('#invoice_product_ids').val();
-        var value=$('#test')
-        $.ajax({
-                    type: "GET",
-                    url: "/render_read/"+id,
-                    dataType: "html",
-                    success: function (data) {
+//	$("#invoice_product_ids").on('change',function(){
+  //      var id=$('#invoice_product_ids').val();
+    //    $.post("/render_read/" + id , null, null, "script");
+       // var value=$('#test')
+       // $.ajax({
+         //           type: "POST",
+           //         url: "/render_read/"+id,
+            //        dataType: "html",
+              //      success: function (data) {
                             // alert(data);
-                            dum = data;
+                //            dum = data;
                            // $('.item-row:last').html(data);
                             //$('.item-row:last').after('<tr class="item-row"></tr>');
-                    }
-            });
-    });
+                 //   }
+            //});
+   // });
 
     $('#search').keyup(function(e){ 
         var value=$('#search').val();
@@ -75,4 +85,26 @@ $(document).ready(function (){
     });
 
 });
+$(document).ready(function (){
+
+$('.add_products').click(function(event){
+
+   if (!validate_add_products()) {
+            event.preventDefault();
+        }
+        else{
+          var id = $("#invoice_product_ids").val();
+          $.post("/render_read/" + id , null, null, "script");
+        }
+});
+$( "#subtotal_quantity" ).keyup(function() {
+  var qty = $(this).val();
+  var rate =$(this).closest("tr").find("#subtotal_rate").val();
+ $(this).closest("tr").find("#subtotal_total").val( qty*rate );
+});
+$(".delete-btn").on("click", function(e){
+  $(this).parent().attr("method","delete").submit();
+});
+});
+
     

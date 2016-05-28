@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   
 
-  get 'render_read/:id' => 'products#render_read'
+  post 'render_read/:id' => 'products#render_read'
+  post 'invoices/add_products/:id' => 'invoices#add_products'
   get 'invoices/index1'
   #get 'invoices#add_content'
   # The priority is based upon order of creation: first created -> highest priority.
@@ -14,7 +15,7 @@ Rails.application.routes.draw do
   resources :products
 
   resources :invoices
-
+   post 'invoices/populate_price' => 'invoices#populate_price'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
