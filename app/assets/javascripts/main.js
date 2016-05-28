@@ -97,14 +97,17 @@ $('.add_products').click(function(event){
           $.post("/render_read/" + id , null, null, "script");
         }
 });
-$( "#subtotal_quantity" ).keyup(function() {
-  var qty = $(this).val();
-  var rate =$(this).closest("tr").find("#subtotal_rate").val();
- $(this).closest("tr").find("#subtotal_total").val( qty*rate );
+$( ".table" ).keyup(function(e) {
+  var qty = $(e.target).closest("tr").find("#subtotal_quantity").val();
+  var rate = $(e.target).closest("tr").find("#subtotal_rate").val();
+$(e.target).closest("tr").find("#subtotal_total").val( qty*rate );
 });
-$(".delete-btn").on("click", function(e){
-  $(this).parent().attr("method","delete").submit();
+$('.delete-btn').click(function(event){
+($(this).closest("tr").hide());
 });
+
 });
+
+
 
     
