@@ -141,3 +141,8 @@ $( ".table1" ).keyup(function(e) {
 $(e.target).closest("tr").find("#subtotal_custom_total").val( qty*rate );
 }); 
 });
+$(document).ready(function (){
+  $('.remove_button').click(function(event){
+  $.post("remove_products" , null, null, "script");
+});
+});

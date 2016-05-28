@@ -91,7 +91,9 @@ end
       end
     end
   end
-
+  
+  def remove_products
+  end
   # DELETE /invoices/1
   # DELETE /invoices/1.json
   def destroy

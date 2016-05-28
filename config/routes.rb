@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   post 'render_read/:id' => 'products#render_read'
   post 'invoices/add_products/:id' => 'invoices#add_products'
+   post 'invoices/remove_products' => 'invoices#remove_products'
   get 'invoices/index1'
   #get 'invoices#add_content'
   # The priority is based upon order of creation: first created -> highest priority.
