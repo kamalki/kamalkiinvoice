@@ -146,3 +146,13 @@ $(document).ready(function (){
   $.post("remove_products" , null, null, "script");
 });
 });
+$(document).ready(function (){
+  var rate = $("#subtotal_rate").val();
+  $('.link').click(function(event){
+    $("#subtotal_rate").prop("disabled",false)
+  });
+  $( "#subtotal_rate" ).keyup(function(e) {
+    var new_rate = $("#subtotal_rate").val()
+   alert("You have changed rate " + new_rate);
+  });
+});
