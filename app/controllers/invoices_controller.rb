@@ -47,6 +47,9 @@ class InvoicesController < ApplicationController
     if @invoice.present?
     product1 = Product.find(params[:invoice][:product_ids]) 
     product1.quantity =  params["invoice"]["products"]["quantity"]
+    if product1.rate != params["invoice"]["products"]["rate"]
+    flash[:notice] = "You have changed rates"
+    end  
     if product1.present?
     @invoice.products << product1
     product = Product.new
@@ -59,17 +62,12 @@ class InvoicesController < ApplicationController
     custom_product_price = params["invoice"]["product"]["total"].to_i rescue 0
     product_price = params["invoice"]["products"]["total"].to_i rescue 0
     @invoice.total =  custom_product_price  + product_price
-
-
-    respond_to do |format|
-      if @invoice.save
-        format.html { redirect_to @invoice, notice: 'Invoice was successfully created.' }
-        format.json { render :show, status: :created, location: @invoice }
-      else
-        format.html { render :new }
-        format.json { render json: @invoice.errors, status: :unprocessable_entity }
-      end
+    if @invoice.save
+     
+    redirect_to @invoice
     end
+
+   
   else
   # here mailer notification cn be send
   end
