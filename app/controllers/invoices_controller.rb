@@ -42,7 +42,20 @@ class InvoicesController < ApplicationController
   # POST /invoices.json
   def create
     # debugger
+    byebug
     @invoice = Invoice.new(invoice_params)
+    product1 = Product.find(params[:invoice][:product_ids]) 
+    product1.quantity =  params["invoice"]["products"]["quantity"]
+    @invoice.products << product1
+    product = Product.new
+    product.product_name =  params["invoice"]["product"]["product_name"]
+    product.rate =  params["invoice"]["product"]["rate"]
+    product.quantity = params["invoice"]["product"]["quantity"]
+    if product.save
+    @invoice.products << product 
+    end      
+    @invoice.total =  params["invoice"]["product"]["total"].to_i + params["invoice"]["products"]["total"].to_i
+
 
     respond_to do |format|
       if @invoice.save
@@ -88,6 +101,6 @@ class InvoicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def invoice_params
-      params.require(:invoice).permit(:date, :invoice_number, :customer, :product_ids, :total, :phone_number,:email_id)
+      params.require(:invoice).permit(:date, :invoice_number, :customer, :total, :phone_number,:email_id)
     end
 end
