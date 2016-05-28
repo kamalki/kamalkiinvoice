@@ -102,12 +102,42 @@ $( ".table" ).keyup(function(e) {
   var rate = $(e.target).closest("tr").find("#subtotal_rate").val();
 $(e.target).closest("tr").find("#subtotal_total").val( qty*rate );
 });
-$('.delete-btn').click(function(event){
-($(this).closest("tr").hide());
+});
+$(document).ready(function (){
+$(".delete-btn").on("click", function(){
+$(this).closest("tr").remove();
 });
 
 });
 
+function validate_new_invoice(){
+  if ($("#1").val() == ""){
+    alert("Please Enter Name");
+    return false;
+  }
+   if ($("#2").val() == ""){
+    alert("Please Enter Telephone Number");
+    return false;
+  }
+   if ($("#2").val() == ""){
+    alert("Please Enter Email");
+    return false;
+  }
+  return true;
+}
 
+$(document).ready(function (){
 
-    
+$('.btn-primary').click(function(event){
+if (!validate_new_invoice()) {
+            event.preventDefault();
+        }
+});
+});
+$(document).ready(function (){
+$( ".table1" ).keyup(function(e) {
+  var qty = $(e.target).closest("tr").find("#subtotal_custom_rate").val();
+  var rate = $(e.target).closest("tr").find("#subtotal_custom_quantity").val();
+$(e.target).closest("tr").find("#subtotal_custom_total").val( qty*rate );
+}); 
+});
