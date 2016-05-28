@@ -3,7 +3,3 @@
 $('.tableID tr:last').find('#selected_product_ids').val("<%= @product_id %>");
 $('.tableID tr:last').find('#subtotal_rate').val("<%= @product_rate%>");
  
- $('.tableID tr:last').clone().appendTo('.tableID');
- if ($("#selected_product_ids").val() == ''){
- 	$(this).closest("tr").hide();
- }
