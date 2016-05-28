@@ -44,8 +44,10 @@ class InvoicesController < ApplicationController
     # debugger
     byebug
     @invoice = Invoice.new(invoice_params)
+    if @invoice.present?
     product1 = Product.find(params[:invoice][:product_ids]) 
     product1.quantity =  params["invoice"]["products"]["quantity"]
+    if product1.present?
     @invoice.products << product1
     product = Product.new
     product.product_name =  params["invoice"]["product"]["product_name"]
@@ -54,7 +56,9 @@ class InvoicesController < ApplicationController
     if product.save
     @invoice.products << product 
     end      
-    @invoice.total =  params["invoice"]["product"]["total"].to_i + params["invoice"]["products"]["total"].to_i
+    custom_product_price = params["invoice"]["product"]["total"].to_i rescue 0
+    product_price = params["invoice"]["products"]["total"].to_i rescue 0
+    @invoice.total =  custom_product_price  + product_price
 
 
     respond_to do |format|
@@ -66,6 +70,12 @@ class InvoicesController < ApplicationController
         format.json { render json: @invoice.errors, status: :unprocessable_entity }
       end
     end
+  else
+  # here mailer notification cn be send
+  end
+else
+#here mailer notificatication
+end
   end
 
   # PATCH/PUT /invoices/1

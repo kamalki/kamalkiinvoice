@@ -16,7 +16,7 @@
         <td><%= invoice.date %></td>
         <td><%= invoice.invoice_number %></td>
         <td><%= invoice.customer %></td>
-        <td><%= invoice.products.first.product_name rescue nil %></td>
+        <td><%= invoice.products.map(&:product_name).join(",") rescue nil %></td>
         <td><%= invoice.total %></td>
       </tr>
     <% end %>
